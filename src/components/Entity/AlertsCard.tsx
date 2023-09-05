@@ -5,11 +5,12 @@ import { OPSGENIE_ANNOTATION } from '../../integration';
 import { AlertsSummary } from '../AlertsSummary';
 
 type AlertsCardProps = {
+  alertsCount?: number,
   title?: string;
   variant?: InfoCardVariants;
 };
 
-export const AlertsCard = ({ title, variant }: AlertsCardProps) => {
+export const AlertsCard = ({ title, alertsCount, variant }: AlertsCardProps) => {
   const { entity } = useEntity();
   const query = entity.metadata.annotations?.[OPSGENIE_ANNOTATION];
 
@@ -21,7 +22,7 @@ export const AlertsCard = ({ title, variant }: AlertsCardProps) => {
 
   return (
     <InfoCard title={title || "Opsgenie — Alerts"} variant={variant || "gridItem"}>
-      <AlertsSummary query={query} />
+      <AlertsSummary query={query} alertsCount={alertsCount} />
     </InfoCard>
   );
 };

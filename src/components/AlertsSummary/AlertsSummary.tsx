@@ -63,9 +63,9 @@ const AlertsSummaryTable = ({ alerts }: { alerts: Alert[] }) => {
   );
 };
 
-export const AlertsSummary = ({ query }: { query: string }) => {
+export const AlertsSummary = ({ query, alertsCount }: { query: string, alertsCount?: number | 3 }) => {
   const opsgenieApi = useApi(opsgenieApiRef);
-  const { value, loading, error } = useAsync(async () => await opsgenieApi.getAlerts({ limit: 3, query: query }));
+  const { value, loading, error } = useAsync(async () => await opsgenieApi.getAlerts({ limit: alertsCount, query: query }));
 
   if (loading) {
     return <Progress />;
